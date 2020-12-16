@@ -1,0 +1,21 @@
+MongoDb Models
+-	User
+-	Id, required, string
+-	Name: required, string
+-	Email: required, string, email validation
+-	Hashpassword: required, string
+-	Reflections, not required, list of foreign keys to reflections, string
+
+-	Activities
+-	Id, required, string
+-	Name: required, string
+-	Description: string
+-	Content: required, string
+-	Reflections, not required, list of foreign keys of reflections, string
+Reflection
+-	Id: required, string
+-	ActivityID: required, string, foreign key -> activities.id
+-	UserID: required, string, foreign key -> user.id
+-	isPublic: required, boolean, 
+-	content: required, string
+-	isPublished: required, boolean. 
