@@ -7,6 +7,7 @@ const reflection = require("./controllers/reflection");
 require("dotenv").config();
 const cors = require("cors");
 const path = require('path');
+const auth = require("./controllers/auth");
 
 InitiateMongoServer();
 
@@ -22,7 +23,7 @@ app.use(bodyParser.json());
 
 
 
-//rnder html file
+//render html file
 app.get('/app', (req, res) => {
   console.log('dir name -> ', __dirname);
   console.log('checking for path -> ', path.join(__dirname + '/build/index.html'))
@@ -35,6 +36,8 @@ app.get('/app', (req, res) => {
  * Method - *
  */
 
+ 
+app.use("/auth", auth);
 app.use("/user", user);
 app.use("/activities", activity);
 app.use("/reflections", reflection);

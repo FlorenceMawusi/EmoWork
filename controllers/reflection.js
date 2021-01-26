@@ -1,10 +1,17 @@
 const reflectionRouter = require("express").Router();
 
+const auth = require("./auth");
+
+const { request, response } = require("express");
 const Reflection = require("../models/reflections");
 
 reflectionRouter.get("/", (request, response) => {
   console.log("This is the requestbody:", request.body);
-  Reflection.find({}).then((res) => {
+
+  Reflection.find()
+  .populate('activity')
+  .select('content activity isPublic isPublished user')
+  .then((res) => {
     const List = res.map((r) => r.toJSON());
     response.status(200).send(List);
   });
@@ -13,10 +20,11 @@ reflectionRouter.get("/", (request, response) => {
 reflectionRouter.post("/", (request, response) => {
   const { content, activity } = request.body;
 
-  if ( content && activity ) {
+  if ( content && activity )  {
     const newReflection = new Reflection({
       content: content,
       activity: activity,
+      
     });
 
     newReflection
@@ -30,5 +38,7 @@ reflectionRouter.post("/", (request, response) => {
       });
   }
 });
+
+
 
 module.exports = reflectionRouter;
