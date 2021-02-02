@@ -23,12 +23,7 @@ app.use(bodyParser.json());
 
 
 
-//render html file
-app.get('/app', (req, res) => {
-  console.log('dir name -> ', __dirname);
-  console.log('checking for path -> ', path.join(__dirname + '/build/index.html'))
-  res.sendFile(path.join(__dirname + '/build/index.html'));
-});
+
 
 /**
  * Router Middleware
@@ -42,8 +37,21 @@ app.use("/user", user);
 app.use("/activities", activity);
 app.use("/reflections", reflection);
 
+if (process.env.NODE_ENV === "development") {
+  app.use("/", express.static(path.join(__dirname, "build")));
+} else {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, "build")));
+  // Handle React routing, return all requests to React app
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+  });
+}
+
+
 //PORT
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
+
