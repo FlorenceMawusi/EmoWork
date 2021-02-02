@@ -13,9 +13,9 @@ InitiateMongoServer();
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.status(200).send(`Hi Welcome to the EmoWork API`);
-});
+// app.get("/", (req, res) => {
+//   res.status(200).send(`Hi Welcome to the EmoWork API`);
+// });
 
 //middleware
 app.use(cors());
