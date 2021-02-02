@@ -29,8 +29,9 @@ router.post(
         errors: errors.array(),
       });
     }
-
+    console.log('reqbody',req.body);
     const { username, email, password } = req.body;
+    
     try {
       let user = await User.findOne({
         email,

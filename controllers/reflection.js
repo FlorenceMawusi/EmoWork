@@ -2,12 +2,13 @@ const reflectionRouter = require("express").Router();
 
 const auth = require("./auth");
 
+
 const { request, response } = require("express");
 const Reflection = require("../models/reflections");
 
-reflectionRouter.get("/", (request, response) => {
+reflectionRouter.get("/", auth, (request, response) => {
   console.log("This is the requestbody:", request.body);
-
+//req.user
   Reflection.find()
   .populate('activity')
   .select('content activity isPublic isPublished user')
@@ -17,13 +18,14 @@ reflectionRouter.get("/", (request, response) => {
   });
 });
 
-reflectionRouter.post("/", (request, response) => {
+reflectionRouter.post("/", auth, (request, response) => {
   const { content, activity } = request.body;
 
-  if ( content && activity )  {
+  if ( content && activity && req.user )  {
     const newReflection = new Reflection({
       content: content,
       activity: activity,
+      user: req.user,
       
     });
 

@@ -4,7 +4,6 @@ const Activity = require("../models/activities");
 
 activityRouter.get("/", (request, response) => {
   const requestBody = request.body;
-  console.log("This is the requestbody:", requestBody);
   Activity.find({}).then((res) => {
     const List = res.map((r) => r.toJSON());
     response.status(200).send(List);
