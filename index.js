@@ -8,14 +8,17 @@ require("dotenv").config();
 const cors = require("cors");
 const path = require('path');
 const auth = require("./controllers/auth");
+const results = require("./controllers/results");
+const likes = require("./controllers/likes");
+const comments = require("./controllers/comments");
 
 InitiateMongoServer();
 
 const app = express();
 
-// app.get("/", (req, res) => {
-//   res.status(200).send(`Hi Welcome to the EmoWork API`);
-// });
+app.get("/", (req, res) => {
+  res.status(200).send(`Hi Welcome to the EmoWork API`);
+});
 
 //middleware
 app.use(cors());
@@ -31,12 +34,6 @@ app.use(bodyParser.json());
  * Method - *
  */
 
- 
-app.use("/auth", auth);
-app.use("/user", user);
-app.use("/activities", activity);
-app.use("/reflections", reflection);
-
 if (process.env.NODE_ENV === "production") {
   app.use("/", express.static(path.join(__dirname, "build")));
 } else {
@@ -47,6 +44,16 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "build", "index.html"));
   });
 }
+ 
+app.use("/auth", auth);
+app.use("/user", user);
+app.use("/activities", activity);
+app.use("/reflections", reflection);
+app.use("/results", results);
+app.use("/likes", likes);
+app.use("/comments", comments);
+
+
 
 
 //PORT

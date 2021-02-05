@@ -3,15 +3,12 @@ const reflectionRouter = require("express").Router();
 const auth = require("./auth");
 
 
-const { request, response } = require("express");
 const Reflection = require("../models/reflections");
 
 reflectionRouter.get("/", auth, (request, response) => {
-  console.log("This is the requestbody:", request.body);
-//req.user
   Reflection.find()
-  .populate('activity')
-  .select('content activity isPublic isPublished user')
+  .populate('activity likes comments')
+  .select('content activity isPublic isPublished user likes comments')
   .then((res) => {
     const List = res.map((r) => r.toJSON());
     response.status(200).send(List);
@@ -20,12 +17,12 @@ reflectionRouter.get("/", auth, (request, response) => {
 
 reflectionRouter.post("/", auth, (request, response) => {
   const { content, activity } = request.body;
-
-  if ( content && activity && req.user )  {
+  console.log(content, activity, request.user);
+  if ( content && activity && request.user )  {
     const newReflection = new Reflection({
       content: content,
       activity: activity,
-      user: req.user,
+      user: request.user.id,
       
     });
 
@@ -38,6 +35,8 @@ reflectionRouter.post("/", auth, (request, response) => {
         console.log(err);
         response.sendStatus(501);
       });
+  } else{
+    response.status(501).send({'msg': "sorry, bad request"});
   }
 });
 
