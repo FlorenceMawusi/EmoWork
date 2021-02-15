@@ -13,6 +13,14 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
+  gender:{
+    type: String,
+  },
+
+  age:{
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now(),
@@ -20,7 +28,7 @@ const UserSchema = new mongoose.Schema({
   reflections: [
     {
       type:mongoose.Schema.Types.ObjectId,
-      ref: 'reflections'
+      ref: 'reflection'
     } 
   ]
 });

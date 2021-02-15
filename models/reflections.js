@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
+mongoose.set('useFindAndModify', false);
 
 const ReflectionSchema = new mongoose.Schema({
   isPublic: {
     type: Boolean,
-    default: true,
+    
   },
   content: {
     required: true,
@@ -11,25 +12,25 @@ const ReflectionSchema = new mongoose.Schema({
   },
   isPublished: {
     type: Boolean,
-    default: true,
+    
   },
   activity: { type: mongoose.Schema.Types.ObjectId, ref: "activity" },
 
   user: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
 
-  likes: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "likes",
-    },
-  ],
+  // likes: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: "likes',
+  //   },
+  // ],
 
-  comments: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "comments",
-    },
-  ],
+  // comments: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: 'comments',
+  //   },
+  // ],
 });
 
 module.exports = mongoose.model("reflection", ReflectionSchema);

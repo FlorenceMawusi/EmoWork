@@ -10,6 +10,6 @@ module.exports = (req, res, next) => {
     next();
   } catch (e) {
     console.error(e); 
-    res.status(500).send({ msg: "Access Denied" });
+    res.status(401).send({ msg: "Access Denied" });
   }
 };
