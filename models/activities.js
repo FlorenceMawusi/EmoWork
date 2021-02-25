@@ -17,6 +17,20 @@ const ActivitySchema = new mongoose.Schema({
     required: false,
     type: String,
   },
+  disabled: {
+    type: Boolean,
+    default: true,
+  },
+  isComplete: {
+    type: String,
+    default: "blank",
+  },
+});
+
+ActivitySchema.set("toJSON", {
+  transform: (document, returnedActivity) => {
+    delete returnedActivity.__v;
+  },
 });
 
 module.exports = mongoose.model("activity", ActivitySchema);

@@ -18,6 +18,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
   },
 
+  field:{
+    type: String,
+  },
+
   age:{
     type: String,
   },
@@ -25,12 +29,12 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  reflections: [
-    {
-      type:mongoose.Schema.Types.ObjectId,
-      ref: 'reflection'
-    } 
-  ]
+  // reflections: [
+  //   {
+  //     type:mongoose.Schema.Types.ObjectId,
+  //     ref: 'reflection'
+  //   } 
+  // ]
 });
 
 //export model user with UserSchema

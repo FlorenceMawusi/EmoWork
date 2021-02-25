@@ -9,8 +9,8 @@ const cors = require("cors");
 const path = require('path');
 const auth = require("./controllers/auth");
 const results = require("./controllers/results");
-const likes = require("./controllers/likes");
-const comments = require("./controllers/comments");
+// const likes = require("./controllers/likes");
+// const comments = require("./controllers/comments");
 
 InitiateMongoServer();
 
@@ -54,8 +54,8 @@ app.use("/user", user);
 app.use("/activities", activity);
 app.use("/reflections", reflection);
 app.use("/results", results);
-app.use("/likes", likes);
-app.use("/comments", comments);
+// app.use("/likes", likes);
+// app.use("/comments", comments);
 
 
 
