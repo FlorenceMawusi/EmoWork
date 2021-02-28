@@ -6,7 +6,7 @@ const Reflection = require("../models/reflections");
 
 reflectionRouter.get("/", auth, (request, response) => {
   Reflection.find()
-    .populate("activity")
+    .populate("activity user")
     .sort({datePosted: "descending"})
     //.select("content activity isPublic isPublished user likes comments")
     .then((res) => {
@@ -26,7 +26,7 @@ reflectionRouter.get("/user", auth, (request, response) => {
   const u_id = request.user.id;
   Reflection.findOne({ user: u_id, activity: activity_id })
     .then((res) => {
-      console.log("reflection draft:", res);
+      
 
       response.status(200).send(res);
     })
@@ -39,7 +39,6 @@ reflectionRouter.get("/usercount", auth, (request, response) => {
   const u_id = request.user.id;
   Reflection.find({ user: u_id,})
     .then((user_reflections) => {
-      console.log("reflection for user", user_reflections);
       ref_len = user_reflections.length;
 
       response.status(200).send({'ref_len':ref_len});

@@ -58,15 +58,17 @@ activityRouter.get("/:id", (request, response) => {
 });
 
 activityRouter.post("/", async (request, response) => {
+  
   const { title, reflection_prompt, benefits, picture } = request.body;
-
+  
   if (title && benefits && reflection_prompt) {
+    
     const newActivity = new Activity({
       title: title,
       reflection_prompt: reflection_prompt,
       benefits: benefits,
       picture: picture,
-      disabled: disabled,
+      
     });
 
     newActivity
@@ -79,7 +81,7 @@ activityRouter.post("/", async (request, response) => {
         response.sendStatus(501);
       });
   } else {
-    response.status(400).send({ msg: "Check your request body" });
+    response.status(501).send({ msg: "Check your request body" });
   }
 });
 

@@ -20,7 +20,6 @@ resultsRouter.get("/usercount", auth, (request, response) => {
   const u_id = request.user.id;
   Results.find({ user: u_id,})
     .then((user_results) => {
-      console.log("results for user", user_results);
       results_len = user_results.length;
 
       response.status(200).send({'results_len':results_len});
