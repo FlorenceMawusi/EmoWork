@@ -49,13 +49,13 @@ app.get("/api", (req, res) => {
   res.status(200).send(`Hi Welcome to the EmoWork API`);
 });
  
-app.use("/auth", auth);
-app.use("/user", user);
-app.use("/activities", activity);
-app.use("/reflections", reflection);
-app.use("/results", results);
-// app.use("/likes", likes);
-// app.use("/comments", comments);
+app.use("/api/auth", auth);
+app.use("/api/user", user);
+app.use("/api/activities", activity);
+app.use("/api/reflections", reflection);
+app.use("/api/results", results);
+// app.use("/api/likes", likes);
+// app.use("/api/comments", comments);
 
 
 
