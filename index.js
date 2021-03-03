@@ -43,11 +43,14 @@ app.use(bodyParser.json());
 //   });
 // }
 
-app.use("/",express.static(path.join(__dirname, "build")));
 
 app.get("/api", (req, res) => {
   res.status(200).send(`Hi Welcome to the EmoWork API`);
 });
+
+
+
+
  
 app.use("/api/auth", auth);
 app.use("/api/user", user);
@@ -57,11 +60,11 @@ app.use("/api/results", results);
 // app.use("/api/likes", likes);
 // app.use("/api/comments", comments);
 
-
+app.use("/",express.static(path.join(__dirname, "build")));
 
 
 //PORT
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
