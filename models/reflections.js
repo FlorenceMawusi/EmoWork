@@ -17,7 +17,7 @@ const ReflectionSchema = new mongoose.Schema({
 
   datePosted: {
     type: Date,
-    default: new Date(),
+    default: Date.now(),
   },
   activity: { type: mongoose.Schema.Types.ObjectId, ref: "activity" },
 
