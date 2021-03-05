@@ -77,7 +77,7 @@ router.post(
       );
     } catch (err) {
       console.log(err.message);
-      res.status(500).send("Error in Saving");
+      res.status(500).json({msg: err.message});
     }
   }
 );
@@ -87,7 +87,7 @@ router.post(
   [
     check("email", "Please enter a valid email").isEmail(),
     check("password", "Please enter a valid password").isLength({
-      min: 6,
+      min: 1,
     }),
   ],
   async (req, res) => {
