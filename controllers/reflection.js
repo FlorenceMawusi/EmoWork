@@ -106,7 +106,7 @@ reflectionRouter.patch("/update", auth, (request, response) => {
           content: content,
           isPublic: isPublic,
           isPublished: isPublished,
-          datePosted: new Date(),
+          datePosted: Date.now(),
         },
       },
       { new: true }

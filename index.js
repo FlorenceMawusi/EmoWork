@@ -6,7 +6,7 @@ const activity = require("./controllers/activity");
 const reflection = require("./controllers/reflection");
 require("dotenv").config();
 const cors = require("cors");
-const path = require('path');
+const path = require("path");
 const auth = require("./controllers/auth");
 const results = require("./controllers/results");
 // const likes = require("./controllers/likes");
@@ -16,15 +16,9 @@ InitiateMongoServer();
 
 const app = express();
 
-
-
 //middleware
 app.use(cors());
 app.use(bodyParser.json());
-
-
-
-
 
 /**
  * Router Middleware
@@ -43,12 +37,10 @@ app.use(bodyParser.json());
 //   });
 // }
 
-
 app.get("/api", (req, res) => {
   res.status(200).send(`Hi Welcome to the EmoWork API`);
 });
 
- 
 app.use("/api/auth", auth);
 app.use("/api/user", user);
 app.use("/api/activities", activity);
@@ -57,12 +49,14 @@ app.use("/api/results", results);
 // app.use("/api/likes", likes);
 // app.use("/api/comments", comments);
 
-app.use("/",express.static(path.join(__dirname, "build")));
+app.use("/", express.static(path.join(__dirname, "build")));
 
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 //PORT
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
-
